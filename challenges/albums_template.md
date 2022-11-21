@@ -58,16 +58,16 @@ Usually, the Model class name will be the capitalised table name (single instead
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: albums
 
 # Model class
-# (in lib/student.rb)
-class Student
+# (in lib/album.rb)
+class Album
 end
 
 # Repository class
-# (in lib/student_repository.rb)
-class StudentRepository
+# (in lib/album_repository.rb)
+class AlbumRepository
 end
 ```
 
@@ -77,24 +77,16 @@ Define the attributes of your Model class. You can usually map the table columns
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: albums
 
 # Model class
-# (in lib/student.rb)
+# (in lib/album.rb)
 
-class Student
+class Album
 
   # Replace the attributes by your own columns.
-  attr_accessor :id, :name, :cohort_name
+  attr_accessor :id, :title, :release_year, :artist_id
 end
-
-# The keyword attr_accessor is a special Ruby feature
-# which allows us to set and get attributes on an object,
-# here's an example:
-#
-# student = Student.new
-# student.name = 'Jo'
-# student.name
 ```
 
 *You may choose to test-drive this class, but unless it contains any more logic than the example above, it is probably not needed.*
@@ -107,29 +99,27 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: albums
 
 # Repository class
-# (in lib/student_repository.rb)
+# (in lib/album_repository.rb)
 
-class StudentRepository
+class AlbumRepository
 
-  # Selecting all records
-  # No arguments
   def all
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students;
+    # SELECT id, title, release_year, artist_id FROM albums;
 
-    # Returns an array of Student objects.
+    # Returns an array of Album objects.
   end
 
   # Gets a single record by its ID
   # One argument: the id (number)
   def find(id)
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students WHERE id = $1;
+    # SELECT id, title, release_year, artist_id FROM albums WHERE id = $1;
 
-    # Returns a single Student object.
+    # Returns a single Album object.
   end
 
   # Add more methods below for each operation you'd like to implement.
