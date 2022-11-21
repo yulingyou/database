@@ -145,34 +145,35 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all students
+# Get all albums
 
-repo = StudentRepository.new
+repo = AlbumRepository.new
 
-students = repo.all
+albums = repo.all
 
-students.length # =>  2
+albums.length # =>  4
 
-students[0].id # =>  1
-students[0].name # =>  'David'
-students[0].cohort_name # =>  'April 2022'
+albums[0].id # =>  1
+albums[0].title # =>  'Doolittle'
+albums[0].release_year # =>  1989
+albums[0].artist_id # => 1
 
-students[1].id # =>  2
-students[1].name # =>  'Anna'
-students[1].cohort_name # =>  'May 2022'
+albums[1].id # =>  2
+albums[1].title # =>  'Surfer Rosa'
+albums[1].release_year # =>  1988
+albums[1].artist_id # => 1
 
 # 2
-# Get a single student
+# Find third albums
 
-repo = StudentRepository.new
+repo = AlbumRepository.new
 
-student = repo.find(1)
+album = repo.find(3)
 
-student.id # =>  1
-student.name # =>  'David'
-student.cohort_name # =>  'April 2022'
-
-# Add more examples for each method
+album.id # =>  3
+album.title # =>  'Super Trouper'
+album.release_year # =>  1980
+album.artist_id # => 2
 ```
 
 Encode this example as a test.
@@ -186,17 +187,21 @@ This is so you get a fresh table contents every time you run the test suite.
 ```ruby
 # EXAMPLE
 
-# file: spec/student_repository_spec.rb
+# file: spec/album_repository_spec.rb
 
-def reset_students_table
-  seed_sql = File.read('spec/seeds_students.sql')
-  connection = PG.connect({ host: '127.0.0.1', dbname: 'students' })
+def reset_albums_table
+  seed_sql = File.read('spec/seeds_albums.sql')
+  if ENV["PG_password"] 
+    connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test', password: ENV["PG_password"] })
+  else
+    connection = PG.connect({ host: '127.0.0.1', dbname: 'music_library_test'})
+  end
   connection.exec(seed_sql)
 end
 
-describe StudentRepository do
+describe AlbumRepository do
   before(:each) do 
-    reset_students_table
+    reset_albums_table
   end
 
   # (your tests will go here).
