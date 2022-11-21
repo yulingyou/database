@@ -1,5 +1,5 @@
-require 'database_connection'
-require 'book'
+require_relative 'database_connection'
+require_relative 'book'
 
 class BookRepository
 
