@@ -16,7 +16,7 @@ describe AlbumRepository do
   end
 
   # (your tests will go here).
-  it "all returns a list of albums" do
+  xit "all returns a list of albums" do
     repo = AlbumRepository.new
 
     albums = repo.all
@@ -34,15 +34,29 @@ describe AlbumRepository do
     expect(albums[1].artist_id).to eq "1"
   end
   # 2
-  it " Find third albums" do
+  # it " Find third albums" do
 
+  #   repo = AlbumRepository.new
+
+  #   album = repo.find(3)
+
+  #   expect(album.id).to eq  "3"
+  #   expect(album.title).to eq 'Super Trouper'
+  #   expect(album.release_year).to eq  "1980"
+  #   expect(album.artist_id).to eq "2"
+  # end
+
+
+
+  it "returns the album with id 3" do
+  
     repo = AlbumRepository.new
 
     album = repo.find(3)
-
-    expect(album.id).to eq  "3"
+    expect(album.id).to eq "3"
     expect(album.title).to eq 'Super Trouper'
-    expect(album.release_year).to eq  "1980"
+    expect(album.release_year).to eq "1980"
     expect(album.artist_id).to eq "2"
+
   end
 end

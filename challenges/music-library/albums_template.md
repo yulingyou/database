@@ -164,16 +164,28 @@ albums[1].release_year # =>  1988
 albums[1].artist_id # => 1
 
 # 2
-# Find third albums
+
 
 repo = AlbumRepository.new
 
 album = repo.find(3)
-
-album.id # =>  3
-album.title # =>  'Super Trouper'
-album.release_year # =>  1980
+album.id # => 3
+album.title # => 'Super Trouper'
+album.release_year # => 1980
 album.artist_id # => 2
+
+
+
+
+# Find third albums
+# repo = AlbumRepository.new
+
+# album = repo.find(3)
+
+# album.id # =>  3
+# album.title # =>  'Super Trouper'
+# album.release_year # =>  1980
+# album.artist_id # => 2
 ```
 
 Encode this example as a test.

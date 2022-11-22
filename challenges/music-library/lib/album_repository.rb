@@ -1,4 +1,4 @@
-require 'Album'
+require_relative 'album'
 class AlbumRepository
 
   def all
@@ -13,14 +13,31 @@ class AlbumRepository
 
   # Gets a single record by its ID
   # One argument: the id (number)
-  def find(id)
+  # def find(id)
     # Executes the SQL query:
     # SELECT id, title, release_year, artist_id FROM albums WHERE id = $1;
 
     # Returns a single Album object.
-    sql_code = "SELECT id, title, release_year, artist_id FROM albums WHERE id = #{id};"
-    result = DatabaseConnection.exec_params(sql_code,[])
-    return make_album(result).first
+  #   sql_code = "SELECT id, title, release_year, artist_id FROM albums WHERE id = #{id};"
+  #   result = DatabaseConnection.exec_params(sql_code,[])
+  #   return make_album(result).first
+  # end
+
+  def find(id)
+    sql = "SELECT * FROM albums WHERE id = $1"
+    result_set = DatabaseConnection.exec_params(sql,[id])
+
+    record = result_set[0]
+
+    album = Album.new
+
+    album.id = record["id"]
+    album.title = record["title"]
+    album.release_year = record["release_year"]
+    album.artist_id = record["artist_id"]
+
+    return album
+
   end
   
   private
