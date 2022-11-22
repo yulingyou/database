@@ -24,7 +24,7 @@ class AlbumRepository
   # end
 
   def find(id)
-    sql = "SELECT * FROM albums WHERE id = $1"
+    sql = "SELECT * FROM albums WHERE id =$1 "
     result_set = DatabaseConnection.exec_params(sql,[id])
 
     record = result_set[0]
