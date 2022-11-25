@@ -25,3 +25,22 @@ puts album.artist_id
 # album_repository.all.each do |album|
 #   p album
 # end
+
+repo = AlbumRepository.new
+
+album_create = Album.new
+album_create.title = 'Trompe le Monde'
+album_create.release_year = '1911'
+album_create.artist_id = 1
+
+
+repo.create(album_create) #INSERT INTO albums...
+
+all_albums = repo.all
+
+all_albums.each do |record|
+  p record
+end
+
+# repo.delete(id) # DELETE FROM albums WHERE id =
+

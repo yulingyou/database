@@ -124,14 +124,22 @@ class AlbumRepository
 
   # Add more methods below for each operation you'd like to implement.
 
-  # def create(student)
-  # end
+  def create(album)
 
-  # def update(student)
-  # end
+   # INSERT INTO albums (title, release_year, artist_id) VALUES($1, $2);
+   #Doesn't need to return anything(only creates the record)
+  end
 
-  # def delete(student)
-  # end
+  def update(album)
+  #UPDATE albums SET title = $1, release_year = $2 artist_id = $3 WHERE id = $4;
+  #Doesn't need to return anything(only updates the record)
+  end
+
+  def delete(id)
+  # DELETE FROM albums WHERE ID = $1;
+  #Doesn't need to return anything(only deletes the record)
+
+  end
 end
 ```
 
@@ -174,9 +182,7 @@ album.title # => 'Super Trouper'
 album.release_year # => 1980
 album.artist_id # => 2
 
-
-
-
+# 2.1
 # Find third albums
 # repo = AlbumRepository.new
 
@@ -186,6 +192,52 @@ album.artist_id # => 2
 # album.title # =>  'Super Trouper'
 # album.release_year # =>  1980
 # album.artist_id # => 2
+
+# 3 Create a new album
+repo = AlbumRepository.new
+
+album = Album.new
+album.title = "Album 01"
+album.release_year = "2022"
+
+
+repo.create(album)
+
+albums = repo.all
+
+last_album = albums.last
+last_album.title = "Album 01"
+last_album.release_year = "2022"
+
+#4
+
+repo = AlbumRepository.new
+
+id_to_delete = 1
+
+repo.delete(id_to_delete)
+
+all_albums = repo.all
+all_albums.length # => 3
+all_albums.first.id # => '2'
+
+#5 
+
+repo = AlbumRepository.new
+
+album = repo.find(1)
+
+album.title = 'Something else'
+album.release_year = '2022'
+
+repo.update(album)
+
+updated_album = repo.find(1)
+
+updated_album.title # => 'Something else'
+updated_album.release_year # => 'Disco'
+
+
 ```
 
 Encode this example as a test.
